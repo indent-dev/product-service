@@ -10,7 +10,7 @@ app.use(express.json())
 app.get('/', (req: Request, res: Response) => {
   res.json({
     isSuccess: true,
-    message: 'Hello world',
+    message: 'This is product service',
   })
 })
 
