@@ -13,4 +13,13 @@ export default class ProductController {
             next(new HttpException(error.statusCode || 500, error.message))
         }
     }
+    
+    async store(req: Request, res: Response, next: NextFunction) {
+        try {
+            const product = await productService.createProduct(req.body)
+            res.send(product)
+        } catch (error) {
+            next(new HttpException(error.statusCode || 500, error.message))
+        }
+    }
 }

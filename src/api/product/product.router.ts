@@ -9,4 +9,10 @@ productRouter.get(
     `${baseUrl}`,
     productController.index
 )
+
+productRouter.post(
+    `${baseUrl}`,
+    productController.store
+)
+
 export default productRouter
