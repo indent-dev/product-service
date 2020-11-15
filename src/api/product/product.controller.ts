@@ -22,4 +22,14 @@ export default class ProductController {
             next(new HttpException(error.statusCode || 500, error.message))
         }
     }
+
+    async edit(req: Request, res: Response, next: NextFunction) {
+        try {
+            const { id } = req.params
+            const project = await productService.editProduct(id, req.body)
+            res.send(project)
+        } catch (error) {
+            next(new HttpException(error.statusCode || 500, error.message))
+        }
+    }
 }

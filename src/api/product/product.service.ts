@@ -34,4 +34,22 @@ export default class ProductService {
             }
         })
     }
+
+    editProduct(id: string, product: Product) {
+        return new Promise(async (resolve, reject) => {
+            try {
+                const editedProduct = await productModel.findByIdAndUpdate(
+                    id,
+                    product,
+                    {
+                      new: true,
+                    }
+                )
+                if (editedProduct) resolve(editedProduct)
+                else throw new HttpException(400, 'project not found')
+            } catch (error) {
+                reject(error)
+            }
+        })
+    }
 }

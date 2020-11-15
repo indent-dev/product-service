@@ -15,4 +15,9 @@ productRouter.post(
     productController.store
 )
 
+productRouter.put(
+    `${baseUrl}/:id?`,
+    productController.edit
+  )
+
 export default productRouter
