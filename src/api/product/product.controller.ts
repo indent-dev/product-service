@@ -32,4 +32,13 @@ export default class ProductController {
             next(new HttpException(error.statusCode || 500, error.message))
         }
     }
+
+    async delete(req: Request, res: Response, next: NextFunction) {
+        try {
+            const result = await productService.deleteProduct(req.params.id)
+            res.send(result)
+        } catch (error) {
+            next(new HttpException(error.statusCode || 500, error.message))
+        }
+    }
 }

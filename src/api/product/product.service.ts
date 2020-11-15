@@ -52,4 +52,22 @@ export default class ProductService {
             }
         })
     }
+
+    deleteProduct(id: string) {
+        return new Promise<Pick<ProductDocument, '_id' | 'product_name'>>(
+            async (resolve, reject) => {
+              try {
+                const deletedProduct = await productModel.findByIdAndUpdate(
+                  id,
+                  { isDeleted: true },
+                  { new: true, lean: true }
+                )
+                if (deletedProduct) resolve(deletedProduct)
+                else throw new HttpException(400, 'project not found')
+              } catch (error) {
+                reject(error)
+              }
+            }
+          )
+    }
 }

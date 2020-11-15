@@ -18,6 +18,11 @@ productRouter.post(
 productRouter.put(
     `${baseUrl}/:id?`,
     productController.edit
-  )
+)
+
+productRouter.delete(
+    `${baseUrl}/:id?`,
+    productController.delete
+)
 
 export default productRouter
