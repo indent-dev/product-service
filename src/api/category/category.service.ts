@@ -2,7 +2,7 @@ import HttpException from '../../utils/httpException'
 import categoryModel from './category.model'
 import { CategoryRequest } from './category.type'
 
-export default class categoryService {
+export default class CategoryService {
   getAllCategory() {
     return categoryModel.find({})
   }
