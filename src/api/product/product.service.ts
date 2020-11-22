@@ -11,7 +11,7 @@ export default class ProductService {
     getAllProduct() {
         return new Promise<ProductDocument[]> (async (resolve, reject) => {
             try {
-                const getProducts = productModel.find({})
+                const getProducts = productModel.find({}).populate('category')
                 if (getProducts) resolve(getProducts)
                 else throw new HttpException(409, 'Product Not Found') 
             } catch (error) {

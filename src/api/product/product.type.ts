@@ -1,7 +1,9 @@
+import { CategoryRequest } from '../category/category.type'
+
 export interface Product {
     product_name: string,
     price: number,
-    category: string,
+    category: CategoryRequest,
     image: string,
     isDeleted: boolean
 }
