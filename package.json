@@ -8,8 +8,7 @@
     "coverage": "jest --coverage --watch-all",
     "start": "node ./build/server.js",
     "build": "tsc --build",
-    "dev": "tsnd --respawn ./src/server.ts",
-    "heroku-postbuild": "npm run build"
+    "dev": "tsnd --respawn ./src/server.ts"
   },
   "author": "indent-dev",
   "license": "ISC",
