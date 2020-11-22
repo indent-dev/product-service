@@ -1,6 +1,7 @@
 import express, { Request, Response } from 'express'
 import cors from 'cors'
 import errorHandler from './middlewares/errorHandler'
+import productRouter from './api/product/product.router'
 import categoryRouter from './api/category/category.router'
 
 const app = express()
@@ -15,7 +16,7 @@ app.get('/', (req: Request, res: Response) => {
   })
 })
 
-
+app.use(productRouter)
 app.use(categoryRouter)
 app.use(errorHandler)
 
