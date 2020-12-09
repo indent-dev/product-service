@@ -2,6 +2,7 @@ require('dotenv').config()
 import mongoose from 'mongoose'
 import { MongoMemoryServer } from 'mongodb-memory-server'
 import categoryModel from '../api/category/category.model'
+import productModel from "../api/product/product.model"
 
 const mongoMemoryServer = new MongoMemoryServer()
 const { CONNECTION_STRING } = process.env
@@ -42,10 +43,19 @@ export async function closeDB(isUsingMemory?: boolean) {
 }
 
 export async function mockingDatabaseRecord() {
-  await categoryModel.create({
+  let category = await categoryModel.create({
     name: 'ATK',
+    isDeleted: false
   })
   await categoryModel.create({
     name: 'pakaian muslim',
+    isDeleted: false
+  })
+
+  await productModel.create({
+    product_name: 'Pensil',
+    category: category._id,
+    image: 'http://google.com',
+    price: 5000,    
   })
 }

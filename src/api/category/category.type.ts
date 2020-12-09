@@ -1,5 +1,6 @@
 export interface Category {
-  name: string
+  name: string,
+  isDeleted: boolean
 }
 
-export type CategoryRequest = Category
+export type CategoryRequest = Omit<Category, 'isDeleted'>
