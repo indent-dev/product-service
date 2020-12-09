@@ -1,6 +1,6 @@
 import HttpException from '../../utils/httpException'
-import categoryModel from './category.model'
-import { CategoryRequest } from './category.type'
+import categoryModel, { CategoryDocument } from './category.model'
+import { Category } from './category.type'
 
 export default class CategoryService {
   getAllCategory() {
@@ -11,7 +11,7 @@ export default class CategoryService {
     return categoryModel.findOne({ name })
   }
 
-  createCategory(category: CategoryRequest) {
+  createCategory(category: Category) {
     return new Promise(async (resolve, reject) => {
       try {
         const isCategoryExist = await this.getCategoryByName(category.name)
@@ -25,7 +25,7 @@ export default class CategoryService {
     })
   }
 
-  updateCategory(id: string, category: CategoryRequest) {
+  updateCategory(id: string, category: Category) {
     return new Promise(async (resolve, reject) => {
       try {
         const updatedCategory = await categoryModel.findByIdAndUpdate(
@@ -36,6 +36,22 @@ export default class CategoryService {
           }
         )
         if (updatedCategory) resolve(updatedCategory)
+        else throw new HttpException(400, 'category not found')
+      } catch (error) {
+        reject(error)
+      }
+    })
+  }
+
+  deleteCategory(id: string) {
+    return new Promise<Pick<CategoryDocument, '_id' | 'name'>>(async (resolve, reject) => {
+      try {
+        const deletedCategory = await categoryModel.findByIdAndUpdate(
+          id,
+          { isDeleted: true },
+          { new: true, lean: true }
+        )
+        if (deletedCategory) resolve(deletedCategory)
         else throw new HttpException(400, 'category not found')
       } catch (error) {
         reject(error)

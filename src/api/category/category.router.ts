@@ -10,5 +10,6 @@ categoryRouter.post(`${baseURL}`, categoryController.createCategory)
 categoryRouter.get(`${baseURL}`, categoryController.getAllCategory)
 // categoryRouter.get(`${baseURL}`, categoryController.getCategoryByName)
 categoryRouter.put(`${baseURL}/:id`, categoryController.updateCategory)
+categoryRouter.delete(`${baseURL}/:id`, categoryController.deleteCategory)
 
 export default categoryRouter

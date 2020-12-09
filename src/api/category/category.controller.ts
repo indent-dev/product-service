@@ -45,4 +45,14 @@ export default class CategoryController {
       next(new HttpException(error.statusCode || 500, error.message))
     }
   }
+
+  async deleteCategory(req: Request, res: Response, next: NextFunction) {
+    try {
+      const result = await categoryService.deleteCategory(req.params.id)
+      res.send(result)
+    } catch (error) {
+      next(new HttpException(error.statusCode || 500, error.message))
+    }
+  }
+  
 }
