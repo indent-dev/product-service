@@ -11,7 +11,7 @@ export default class ProductService {
     getAllProduct() {
         return new Promise<ProductDocument[]> (async (resolve, reject) => {
             try {
-                const getProducts = productModel.find({}).populate('category')
+                const getProducts = productModel.find({ isDeleted: false }).populate('category')
                 if (getProducts) resolve(getProducts)
                 else throw new HttpException(409, 'Product Not Found') 
             } catch (error) {
@@ -63,7 +63,7 @@ export default class ProductService {
                   { new: true, lean: true }
                 )
                 if (deletedProduct) resolve(deletedProduct)
-                else throw new HttpException(400, 'project not found')
+                else throw new HttpException(400, 'product not found')
               } catch (error) {
                 reject(error)
               }

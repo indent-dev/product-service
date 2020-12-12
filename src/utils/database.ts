@@ -14,7 +14,7 @@ const options = {
 
 async function getConnectionString(isUsingMemory?: boolean) {
   return isUsingMemory
-    ? await mongoMemoryServer.getConnectionString()
+    ? await mongoMemoryServer.getUri()
     : `${CONNECTION_STRING}`
 }
 
@@ -43,19 +43,28 @@ export async function closeDB(isUsingMemory?: boolean) {
 }
 
 export async function mockingDatabaseRecord() {
-  let category = await categoryModel.create({
+  let category1 = await categoryModel.create({
     name: 'ATK',
     isDeleted: false
   })
-  await categoryModel.create({
+  let category2 = await categoryModel.create({
     name: 'pakaian muslim',
     isDeleted: false
   })
 
   await productModel.create({
-    product_name: 'Pensil',
-    category: category._id,
-    image: 'http://google.com',
+    product_name: 'pensil',
+    category: category1._id,
+    description: 'Pensil digunakan untuk menulis dan juga menggambar.',
+    image: 'https://static.bmdstatic.com/pk/product/medium/5f19476e40c98.jpg',
     price: 5000,    
+  })
+
+  await productModel.create({
+    product_name: 'sarung',
+    category: category2._id,
+    description: 'sarung digunakan untuk sholat',
+    image: 'https://ecs7.tokopedia.net/img/cache/700/product-1/2019/11/18/63021111/63021111_31abdd49-cb2b-452d-8b53-b987c109c35b_700_700',
+    price: 250000,
   })
 }

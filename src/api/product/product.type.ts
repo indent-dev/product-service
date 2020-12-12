@@ -4,6 +4,7 @@ export interface Product {
     product_name: string,
     price: number,
     category: CategoryRequest,
+    description: string,
     image: string,
     isDeleted: boolean
 }
